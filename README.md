@@ -3,8 +3,8 @@
 Совместный проект по курсу [Совместная разработка приложений на Python3](http://uneex.org/LecturesCMC/PythonDevelopment2021/)
 
 ## Участники
-* Тимачев Алексей, 523 группа, github: [myCloudStrife](https://github.com/myCloudStrife)
-* Закиров Гадель, 523 группа, github: [Gadel13](https://github.com/Gadel13)
+* Тимачев Алексей Андреевич, 523 группа, github: [myCloudStrife](https://github.com/myCloudStrife)
+* Закиров Гадель Ильгизович, 523 группа, github: [Gadel13](https://github.com/Gadel13)
 
 ## Задача
 
