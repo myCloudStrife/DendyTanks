@@ -1,15 +1,14 @@
-'''
-todo: write some text here.
-'''
+"""todo: write some text here."""
 
 import sys
 import pygame
 from pygame.math import Vector2
 from time import time
+from GameObject import PlayerTank
 
 
 class DendyTanks:
-  """Main class for DendyTanks game"""
+  """Main class for DendyTanks game."""
   def __init__(self):
     pygame.init()
     self.screenWidth = 640
@@ -41,43 +40,9 @@ class DendyTanks:
     pygame.display.flip()
 
 
-class GameObject():
-  """Class that represents every object in game, such as tank or bullet."""
-  def __init__(self, resourceName):
-    self.coords = Vector2(0, 0)
-    self.speed = Vector2(0, 0)
-    self.image = pygame.image.load(resourceName) if resourceName else None
-    self.rect = self.image.get_rect()
-
-  def update(self, dt, control=None):
-    self.coords += dt * self.speed
-    self.rect.update(self.coords, self.rect.size)
-
-  def render(self, screen):
-    screen.blit(self.image, self.rect)
-
-
-class PlayerTank(GameObject):
-  def __init__(self, pos):
-    super().__init__("res/playerTank.png")
-    self.coords = pos
-
-  def update(self, dt, control):
-    direction = Vector2(0, 0)
-    if pygame.K_UP in control.pressedKeys:
-      direction = Vector2(0, -1)
-    elif pygame.K_DOWN in control.pressedKeys:
-      direction = Vector2(0, 1)
-    elif pygame.K_LEFT in control.pressedKeys:
-      direction = Vector2(-1, 0)
-    elif pygame.K_RIGHT in control.pressedKeys:
-      direction = Vector2(1, 0)
-    self.speed = direction * 120
-    super().update(dt, control)
-
-
 class Control():
-  """Contain input from user"""
+  """Contain input from user."""
+
   def __init__(self):
     self.pressedKeys = set()
 
