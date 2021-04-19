@@ -5,6 +5,7 @@ import pygame
 from pygame.math import Vector2
 from time import time
 from GameObject import PlayerTank
+from pygame import freetype
 
 
 class DendyTanks:
@@ -18,6 +19,10 @@ class DendyTanks:
     self.allObjects = []
     self.allObjects.append(PlayerTank(Vector2(320, 240)))
     self.control = Control()
+
+    myfont = freetype.SysFont("Liberation Sans", 30)
+    text = "Use arrows (←, ↑, →, ↓) to move your tank."
+    self.tutorialMsg, _ = myfont.render(text, (255, 255, 255))
 
   def mainloop(self):
     while 1:
@@ -37,6 +42,7 @@ class DendyTanks:
     self.screen.fill(backGroundColor)
     for obj in self.allObjects:
       obj.render(self.screen)
+    self.screen.blit(self.tutorialMsg, (0, 0))
     pygame.display.flip()
 
 
