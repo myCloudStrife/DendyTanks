@@ -7,6 +7,10 @@ from pygame.math import Vector2
 from time import time
 from GameObject import PlayerTank
 from pygame import freetype
+import gettext
+
+gettext.install("all", "localization")
+
 
 class DendyTanks:
   """Main class for DendyTanks game."""
@@ -21,8 +25,8 @@ class DendyTanks:
     self.control = Control()
 
     myfont = freetype.SysFont("Liberation Sans", 30)
-    text = "Use arrows (←, ↑, →, ↓) to move your tank."
-    self.tutorialMsg, _ = myfont.render(text, (255, 255, 255))
+    text = _("Use arrows (←, ↑, →, ↓) to move your tank.")
+    self.tutorialMsg, rect = myfont.render(text, (255, 255, 255))
 
   def mainloop(self):
     while 1:
