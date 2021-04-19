@@ -1,12 +1,12 @@
 """todo: write some text here."""
 
 import sys
+import os
 import pygame
 from pygame.math import Vector2
 from time import time
 from GameObject import PlayerTank
 from pygame import freetype
-
 
 class DendyTanks:
   """Main class for DendyTanks game."""
@@ -64,7 +64,10 @@ class Control():
 
 
 def main():
-  """Main application call"""
+  """Change working directory to project folder and call mainloop."""
+  srcDir = os.path.dirname(__file__)
+  projectDir = os.path.join(srcDir, "..")
+  os.chdir(projectDir)
   DendyTanks().mainloop()
 
 
