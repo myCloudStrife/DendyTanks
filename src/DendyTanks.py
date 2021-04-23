@@ -9,6 +9,8 @@ from GameObject import PlayerTank
 from pygame import freetype
 import gettext
 
+# todo: move it outside from here, because now localization not work when run not from
+# project root folder. maybe create separate file with only localization messages
 gettext.install("all", "localization")
 
 
