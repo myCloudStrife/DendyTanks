@@ -23,12 +23,12 @@ class DendyTanks:
     self.screenHeight = 480
     self.screen = pygame.display.set_mode((640, 480))
     self.time = time()
-    self.allObjects = []
-    self.allObjects.append(PlayerTank(Vector2(320, 240)))
     self.control = Control()
     self.scene = Scene("res/level0.txt")
     self.sceneSubsurface = self.screen.subsurface(Vector2(0, 0), Vector2(self.screenHeight,
                                                                          self.screenHeight))
+    self.allObjects = []
+    self.allObjects.append(PlayerTank(pos=Vector2(320, 240), size=self.scene.cellSize))
 
     myfont = freetype.SysFont("Liberation Sans", 30)
     text = _("Use arrows (←, ↑, →, ↓) to move your tank.")

@@ -1,26 +1,36 @@
 """Module with GameObject class."""
 import pygame
 from pygame.math import Vector2
+from pygame import Rect
 
 
 class GameObject():
   """Class that represents every object in game, such as tank or bullet."""
 
-  def __init__(self, resourceName):
-    """Construct GameObject."""
-    self.coords = Vector2(0, 0)
-    self.speed = Vector2(0, 0)
+  def __init__(self, resourceName, pos=Vector2(0, 0), size=0):
+    """Construct GameObject.
+
+    :param str resourceName: path to texture
+    :param pygame.math.Vector2 pos: object's initial position
+    :param int size: size for object's Rect
+    """
+    self.pos = pos
+    self.vel = Vector2(0, 0)
     self.image = pygame.image.load(resourceName) if resourceName else None
-    self.rect = self.image.get_rect()
+    if self.image and size == 0:
+      size = self.image.width
+    self.image = pygame.transform.scale(self.image, (size, size))
+    self.rect = Rect(pos, Vector2(size, size))
 
   def update(self, dt, control=None):
     """Update object."""
-    self.coords += dt * self.speed
-    self.rect.update(self.coords, self.rect.size)
+    self.pos += dt * self.vel
+    self.rect.topleft = self.pos
 
   def render(self, screen):
     """Render object to the screen."""
-    screen.blit(self.image, self.rect)
+    if self.image:
+      screen.blit(self.image, self.rect)
 
 
 class PlayerTank(GameObject):
@@ -30,14 +40,9 @@ class PlayerTank(GameObject):
   It has own texture and control support.
   """
 
-  def __init__(self, pos: Vector2):
-    """
-    Construct ``GameObject`` with special texture and place it to ``pos``.
-
-    :param pos: coordinates where to place player tank.
-    """
-    super().__init__("res/playerTank.png")
-    self.coords = pos
+  def __init__(self, **kwargs):
+    """Construct PlayerTank."""
+    super().__init__("res/playerTank.png", **kwargs)
 
   def update(self, dt, control):
     """Update tank's speed based on pressed keys and call GameObject's update."""
@@ -50,5 +55,5 @@ class PlayerTank(GameObject):
       direction = Vector2(-1, 0)
     elif pygame.K_RIGHT in control.pressedKeys:
       direction = Vector2(1, 0)
-    self.speed = direction * 120
+    self.vel = direction * 2 * self.rect.width
     super().update(dt, control)
