@@ -25,8 +25,9 @@ class DendyTanks:
     self.time = time()
     self.control = Control()
     self.scene = Scene("res/level0.txt")
-    self.sceneSubsurface = self.screen.subsurface(Vector2(0, 0), Vector2(self.screenHeight,
-                                                                         self.screenHeight))
+    self.sceneSurface = pygame.Surface(self.scene.bbox.size)
+    print("Use {}x{} texture for intermediate rendering".format(
+      self.sceneSurface.get_width(), self.sceneSurface.get_height()))
     self.allObjects = []
     self.allObjects.append(PlayerTank(pos=Vector2(320, 240), size=self.scene.cellSize))
 
@@ -50,9 +51,12 @@ class DendyTanks:
   def render(self):
     backGroundColor = (20, 20, 100)
     self.screen.fill(backGroundColor)
-    self.scene.render(self.sceneSubsurface)
+    self.scene.render(self.sceneSurface)
     for obj in self.allObjects:
-      obj.render(self.screen)
+      obj.render(self.sceneSurface)
+    sceneSubsurface = self.screen.subsurface(0, 0, self.screenHeight, self.screenHeight)
+    pygame.transform.smoothscale(self.sceneSurface, (self.screenHeight, self.screenHeight),
+                                 sceneSubsurface)
     self.screen.blit(self.tutorialMsg, (0, 0))
     pygame.display.flip()
 
