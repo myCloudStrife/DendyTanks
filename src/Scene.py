@@ -8,12 +8,15 @@ from pygame import gfxdraw
 class Scene():
   """Scene.
 
-  :var Rect bbox: scene bounding box
-  :var List[Rect] bricks: list with brick blocks
+  :var pygame.Rect bbox: scene bounding box
+  :var list[pygame.Rect] bricks: list with brick blocks
   """
 
   def __init__(self, sceneName):
-    """Scene constructor."""
+    """Load scene from file.
+
+    :param str sceneName: file name with scene
+    """
     w = -1
     h = 0
     self.bricks = []
@@ -32,8 +35,8 @@ class Scene():
   def _processCell(self, cell, pos):
     """Add cell to scene.
 
-    :param char cell: type of cell
-    :param Vector2 pos: cell position in scene
+    :param str cell: type of cell
+    :param pygame.math.Vector2 pos: cell position in scene
     """
     if cell == 'b':
       self.bricks.append(Rect(pos, Vector2(1, 1)))
@@ -45,7 +48,7 @@ class Scene():
   def render(self, screen):
     """Draw scene.
 
-    :param Surface screen: surface where you want to draw scene
+    :param pygame.Surface screen: surface where you want to draw scene
     """
     backgroundColor = (0, 0, 0)
     screen.fill(backgroundColor)
