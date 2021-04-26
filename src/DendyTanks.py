@@ -45,8 +45,17 @@ class DendyTanks:
     prevTime = self.time
     self.time = time()
     dt = self.time - prevTime
+
+    def testCollision(rect):
+      res = False
+      res |= self.scene.testCollision(rect)
+      for obj in self.allObjects:
+        if rect != obj.rect:
+          res |= obj.rect.colliderect(rect)
+      return res
+
     for obj in self.allObjects:
-      obj.update(dt, self.control)
+      obj.update(dt, self.control, testCollision)
 
   def render(self):
     backGroundColor = (20, 20, 100)

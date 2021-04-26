@@ -47,6 +47,14 @@ class Scene():
     else:
       assert False, f"Unknown cell type \"{cell}\""
 
+  def testCollision(self, rect):
+    """Test collision between rect and scene.
+
+    :param pygame.Rect rect: rectangle to be tested
+    """
+    fittedRect = rect.clamp(self.bbox)
+    return fittedRect.topleft != rect.topleft or rect.collidelist(self.bricks) != -1
+
   def render(self, screen):
     """Draw scene.
 

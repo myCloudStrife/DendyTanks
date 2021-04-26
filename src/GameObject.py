@@ -22,10 +22,14 @@ class GameObject():
     self.image = pygame.transform.scale(self.image, (size, size))
     self.rect = Rect(pos, Vector2(size, size))
 
-  def update(self, dt, control=None):
+  def update(self, dt, control=None, collision=None):
     """Update object."""
+    oldPos = self.pos.xy
     self.pos += dt * self.vel
     self.rect.topleft = self.pos
+    if collision and collision(self.rect):
+      self.pos = oldPos
+      self.rect.topleft = self.pos
 
   def render(self, screen):
     """Render object to the screen."""
@@ -44,7 +48,7 @@ class PlayerTank(GameObject):
     """Construct PlayerTank."""
     super().__init__("res/playerTank.png", **kwargs)
 
-  def update(self, dt, control):
+  def update(self, dt, control, collision):
     """Update tank's speed based on pressed keys and call GameObject's update."""
     direction = Vector2(0, 0)
     if pygame.K_UP in control.pressedKeys:
@@ -56,4 +60,4 @@ class PlayerTank(GameObject):
     elif pygame.K_RIGHT in control.pressedKeys:
       direction = Vector2(1, 0)
     self.vel = direction * 2 * self.rect.width
-    super().update(dt, control)
+    super().update(dt, control, collision)
