@@ -9,6 +9,7 @@ class Scene():
   """Scene.
 
   :var pygame.Rect bbox: scene bounding box
+  :var int cellSize: size of single cell, for both X and Y axis
   :var list[pygame.Rect] bricks: list with brick blocks
   """
 
@@ -20,6 +21,7 @@ class Scene():
     w = -1
     h = 0
     self.bricks = []
+    self.cellSize = 64
     with open(sceneName) as sceneFile:
       for line in sceneFile:
         line = line.rstrip()
@@ -30,7 +32,7 @@ class Scene():
         for i, cell in enumerate(line):
           self._processCell(cell, Vector2(i, h))
         h += 1
-    self.bbox = Rect(Vector2(0, 0), Vector2(w, h))
+    self.bbox = Rect(Vector2(0, 0), Vector2(w, h) * self.cellSize)
 
   def _processCell(self, cell, pos):
     """Add cell to scene.
@@ -39,7 +41,7 @@ class Scene():
     :param pygame.math.Vector2 pos: cell position in scene
     """
     if cell == 'b':
-      self.bricks.append(Rect(pos, Vector2(1, 1)))
+      self.bricks.append(Rect(pos * self.cellSize, Vector2(1, 1) * self.cellSize))
     elif cell == '.':
       pass  # empty cell
     else:
