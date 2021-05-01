@@ -73,6 +73,7 @@ class PlayerTank(CollidableGameObject):
     """Construct PlayerTank."""
     super().__init__("res/playerTank.png", **kwargs)
     self.pressedKeys = []
+    self.baseImage = self.image.copy()
 
   def handleEvent(self, event):
     """Handle movements keys and shoot key."""
@@ -87,15 +88,24 @@ class PlayerTank(CollidableGameObject):
   def update(self, dt):
     """Update tank's speed based on pressed keys and call GameObject's update."""
     speed = 2 * self.rect.width
+    halfCellSize = Game.current_scene.cellSize / 2
     if len(self.pressedKeys) > 0:
       if self.pressedKeys[-1] == pygame.K_UP:
         self.vel = Vector2(0, -speed)
+        self.image = pygame.transform.rotate(self.baseImage, 0)
+        self.pos.x = round(self.pos.x / halfCellSize) * halfCellSize
       elif self.pressedKeys[-1] == pygame.K_DOWN:
         self.vel = Vector2(0, speed)
+        self.image = pygame.transform.rotate(self.baseImage, 180)
+        self.pos.x = round(self.pos.x / halfCellSize) * halfCellSize
       elif self.pressedKeys[-1] == pygame.K_LEFT:
         self.vel = Vector2(-speed, 0)
+        self.image = pygame.transform.rotate(self.baseImage, 90)
+        self.pos.y = round(self.pos.y / halfCellSize) * halfCellSize
       elif self.pressedKeys[-1] == pygame.K_RIGHT:
         self.vel = Vector2(speed, 0)
+        self.image = pygame.transform.rotate(self.baseImage, 270)
+        self.pos.y = round(self.pos.y / halfCellSize) * halfCellSize
     else:
       self.vel = Vector2(0, 0)
     super().update(dt)
