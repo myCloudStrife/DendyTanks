@@ -18,9 +18,10 @@ class GameObject():
     self.pos = pos
     self.vel = Vector2(0, 0)
     self.image = pygame.image.load(resourceName) if resourceName else None
-    if self.image and size == 0:
-      size = self.image.width
-    self.image = pygame.transform.scale(self.image, (size, size))
+    if self.image:
+      if size == 0:
+        size = self.image.width
+      self.image = pygame.transform.scale(self.image, (size, size))
     self.rect = Rect(pos, Vector2(size, size))
 
   def handleEvent(self, event):
@@ -74,6 +75,7 @@ class PlayerTank(CollidableGameObject):
     super().__init__("res/playerTank.png", **kwargs)
     self.pressedKeys = []
     self.baseImage = self.image.copy()
+    self.direction = Vector2(0, -1)
 
   def handleEvent(self, event):
     """Handle movements keys and shoot key."""
@@ -85,27 +87,46 @@ class PlayerTank(CollidableGameObject):
       if event.key in (pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT):
         self.pressedKeys.remove(event.key)
 
-  def update(self, dt):
-    """Update tank's speed based on pressed keys and call GameObject's update."""
+    self.updateVelocity()
+    if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+      halfCellSize = self.rect.w / 2
+      bulletSize = halfCellSize // 2
+      bulletCenter = self.rect.center + self.direction * (halfCellSize + bulletSize / 2)
+      bulletPos = bulletCenter - Vector2(bulletSize / 2, bulletSize / 2)
+      bullet = Bullet(None, bulletPos, bulletSize)
+      bullet.vel = self.direction * 4 * self.rect.w
+      Game.all_objects.append(bullet)
+
+  def updateVelocity(self):
+    """Update tank's velocity based on pressed keys."""
     speed = 2 * self.rect.width
-    halfCellSize = Game.current_scene.cellSize / 2
+    halfCellSize = self.rect.w / 2
     if len(self.pressedKeys) > 0:
       if self.pressedKeys[-1] == pygame.K_UP:
-        self.vel = Vector2(0, -speed)
+        self.direction = Vector2(0, -1)
         self.image = pygame.transform.rotate(self.baseImage, 0)
         self.pos.x = round(self.pos.x / halfCellSize) * halfCellSize
       elif self.pressedKeys[-1] == pygame.K_DOWN:
-        self.vel = Vector2(0, speed)
+        self.direction = Vector2(0, 1)
         self.image = pygame.transform.rotate(self.baseImage, 180)
         self.pos.x = round(self.pos.x / halfCellSize) * halfCellSize
       elif self.pressedKeys[-1] == pygame.K_LEFT:
-        self.vel = Vector2(-speed, 0)
+        self.direction = Vector2(-1, 0)
         self.image = pygame.transform.rotate(self.baseImage, 90)
         self.pos.y = round(self.pos.y / halfCellSize) * halfCellSize
       elif self.pressedKeys[-1] == pygame.K_RIGHT:
-        self.vel = Vector2(speed, 0)
+        self.direction = Vector2(1, 0)
         self.image = pygame.transform.rotate(self.baseImage, 270)
         self.pos.y = round(self.pos.y / halfCellSize) * halfCellSize
+      self.vel = self.direction * speed
     else:
       self.vel = Vector2(0, 0)
-    super().update(dt)
+
+
+class Bullet(GameObject):
+  """Bullet object."""
+
+  def render(self, screen):
+    """Render bullet to the screen."""
+    pygame.gfxdraw.filled_circle(screen, self.rect.centerx, self.rect.centery,
+                                 self.rect.w // 2, (255, 255, 255))
