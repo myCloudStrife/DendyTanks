@@ -2,6 +2,7 @@
 import pygame
 from pygame.math import Vector2
 from pygame import Rect
+import Game
 
 
 class GameObject():
@@ -22,14 +23,17 @@ class GameObject():
     self.image = pygame.transform.scale(self.image, (size, size))
     self.rect = Rect(pos, Vector2(size, size))
 
-  def update(self, dt, control=None, collision=None):
+  def handleEvent(self, event):
+    """Handle event by object.
+
+    :param pygame.event.EventType event: event to be handled
+    """
+    pass
+
+  def update(self, dt):
     """Update object."""
-    oldPos = self.pos.xy
     self.pos += dt * self.vel
     self.rect.topleft = self.pos
-    if collision and collision(self.rect):
-      self.pos = oldPos
-      self.rect.topleft = self.pos
 
   def render(self, screen):
     """Render object to the screen."""
@@ -37,7 +41,28 @@ class GameObject():
       screen.blit(self.image, self.rect)
 
 
-class PlayerTank(GameObject):
+class CollidableGameObject(GameObject):
+  """GameObject with collision."""
+
+  def testCollision(self, rect):
+    """Test if object collides with rect."""
+    return self.rect.colliderect(rect)
+
+  def update(self, dt):
+    """Update object with collision."""
+    oldPos = self.pos.xy
+    super().update(dt)
+
+    collide = Game.current_scene.testCollision(self.rect)
+    for obj in Game.all_objects:
+      if hasattr(obj, "testCollision") and self != obj:
+        collide |= obj.testCollision(self.rect)
+    if collide:
+      self.pos = oldPos
+      self.rect.topleft = self.pos
+
+
+class PlayerTank(CollidableGameObject):
   """
   Player's tank class.
 
@@ -47,17 +72,30 @@ class PlayerTank(GameObject):
   def __init__(self, **kwargs):
     """Construct PlayerTank."""
     super().__init__("res/playerTank.png", **kwargs)
+    self.pressedKeys = []
 
-  def update(self, dt, control, collision):
+  def handleEvent(self, event):
+    """Handle movements keys and shoot key."""
+    if event.type == pygame.KEYDOWN:
+      if event.key in (pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT):
+        self.pressedKeys.append(event.key)
+
+    elif event.type == pygame.KEYUP:
+      if event.key in (pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT):
+        self.pressedKeys.remove(event.key)
+
+  def update(self, dt):
     """Update tank's speed based on pressed keys and call GameObject's update."""
-    direction = Vector2(0, 0)
-    if pygame.K_UP in control.pressedKeys:
-      direction = Vector2(0, -1)
-    elif pygame.K_DOWN in control.pressedKeys:
-      direction = Vector2(0, 1)
-    elif pygame.K_LEFT in control.pressedKeys:
-      direction = Vector2(-1, 0)
-    elif pygame.K_RIGHT in control.pressedKeys:
-      direction = Vector2(1, 0)
-    self.vel = direction * 2 * self.rect.width
-    super().update(dt, control, collision)
+    speed = 2 * self.rect.width
+    if len(self.pressedKeys) > 0:
+      if self.pressedKeys[-1] == pygame.K_UP:
+        self.vel = Vector2(0, -speed)
+      elif self.pressedKeys[-1] == pygame.K_DOWN:
+        self.vel = Vector2(0, speed)
+      elif self.pressedKeys[-1] == pygame.K_LEFT:
+        self.vel = Vector2(-speed, 0)
+      elif self.pressedKeys[-1] == pygame.K_RIGHT:
+        self.vel = Vector2(speed, 0)
+    else:
+      self.vel = Vector2(0, 0)
+    super().update(dt)
