@@ -72,3 +72,31 @@ class Scene():
     for brick in self.bricks:
       r = sceneToScreen(brick)
       gfxdraw.box(screen, r, (255, 0, 0))
+
+  def damage(self, rect, direction):
+    """Damage scene obstacles.
+
+    :param pygame.Rect rect: rectangle that dealing damage
+    :param pygame.math.Vector2 direction: rectangle's movement direction
+    """
+    hits = rect.collidelistall(self.bricks)
+    halfSize = self.cellSize // 2
+    forRemove = []
+    for idx in hits:
+      b = self.bricks[idx]
+      if b.w == self.cellSize:
+        forRemove.append(idx)
+        self.bricks.append(Rect((b.x, b.y), (halfSize, halfSize)))
+        self.bricks.append(Rect((b.x + halfSize, b.y), (halfSize, halfSize)))
+        self.bricks.append(Rect((b.x, b.y + halfSize), (halfSize, halfSize)))
+        self.bricks.append(Rect((b.x + halfSize, b.y + halfSize), (halfSize, halfSize)))
+        for idx in rect.collidelistall(self.bricks[-4:]):
+          idx = -4 + idx
+          b = self.bricks[idx]
+          self.bricks[idx] = b.clip(Rect(Vector2(b.topleft) + direction * halfSize // 2, b.size))
+      else:
+        self.bricks[idx] = b.clip(Rect(Vector2(b.topleft) + direction * halfSize // 2, b.size))
+        if self.bricks[idx].size == (0, 0):
+          forRemove.append(idx)
+    for idx in forRemove[-1::-1]:
+      self.bricks.pop(idx)

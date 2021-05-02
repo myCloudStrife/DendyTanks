@@ -101,6 +101,7 @@ class PlayerTank(CollidableGameObject):
     """Update tank's velocity based on pressed keys."""
     speed = 2 * self.rect.width
     halfCellSize = self.rect.w / 2
+    prevPos = self.pos.xy
     if len(self.pressedKeys) > 0:
       if self.pressedKeys[-1] == pygame.K_UP:
         self.direction = Vector2(0, -1)
@@ -119,12 +120,22 @@ class PlayerTank(CollidableGameObject):
         self.image = pygame.transform.rotate(self.baseImage, 270)
         self.pos.y = round(self.pos.y / halfCellSize) * halfCellSize
       self.vel = self.direction * speed
+      self.rect.topleft = self.pos
+      if Game.current_scene.testCollision(self.rect):
+        self.pos = prevPos - (self.pos - prevPos)
     else:
       self.vel = Vector2(0, 0)
 
 
 class Bullet(GameObject):
   """Bullet object."""
+
+  def update(self, dt):
+    """Destroy scene bricks when hit them."""
+    if Game.current_scene.testCollision(self.rect):
+      Game.current_scene.damage(self.rect, Vector2.normalize(self.vel))
+      Game.all_objects.remove(self)
+    super().update(dt)
 
   def render(self, screen):
     """Render bullet to the screen."""
