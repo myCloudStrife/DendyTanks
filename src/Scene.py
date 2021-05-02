@@ -2,6 +2,7 @@
 
 from pygame.math import Vector2
 from pygame.rect import Rect
+import pygame
 from pygame import gfxdraw
 
 
@@ -33,6 +34,9 @@ class Scene():
           self._processCell(cell, Vector2(i, h))
         h += 1
     self.bbox = Rect(Vector2(0, 0), Vector2(w, h) * self.cellSize)
+    self.bricksImage = pygame.image.load("res/bricks.png")
+    halfSize = self.cellSize // 2
+    self.bricksImage = pygame.transform.scale(self.bricksImage, (halfSize, halfSize))
 
   def _processCell(self, cell, pos):
     """Add cell to scene.
@@ -62,16 +66,11 @@ class Scene():
     """
     backgroundColor = (0, 0, 0)
     screen.fill(backgroundColor)
-    screenSize = screen.get_size()
-    sceneToScreenScale = [s1 / s2 for s1, s2 in zip(screenSize, self.bbox.size)]
-
-    def sceneToScreen(sceneRect):
-      return Rect([coord * scale for coord, scale in zip(sceneRect.topleft, sceneToScreenScale)],
-                  [size * scale for size, scale in zip(sceneRect.size, sceneToScreenScale)])
+    assert(screen.get_size() == self.bbox.size)
 
     for brick in self.bricks:
-      r = sceneToScreen(brick)
-      gfxdraw.box(screen, r, (255, 0, 0))
+      points = [brick.topleft, brick.topright, brick.bottomright, brick.bottomleft]
+      gfxdraw.textured_polygon(screen, points, self.bricksImage, 2, -1)
 
   def damage(self, rect, direction):
     """Damage scene obstacles.
