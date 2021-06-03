@@ -93,7 +93,7 @@ class PlayerTank(CollidableGameObject):
       bulletSize = halfCellSize // 2
       bulletCenter = self.rect.center + self.direction * (halfCellSize + bulletSize / 2)
       bulletPos = bulletCenter - Vector2(bulletSize / 2, bulletSize / 2)
-      bullet = Bullet(None, bulletPos, bulletSize)
+      bullet = Bullet(self, pos=bulletPos, size=bulletSize)
       bullet.vel = self.direction * 4 * self.rect.w
       Game.all_objects.append(bullet)
 
@@ -130,10 +130,26 @@ class PlayerTank(CollidableGameObject):
 class Bullet(GameObject):
   """Bullet object."""
 
+  def __init__(self, parent, **kwargs):
+    """Construct bullet.
+
+    :param GameObject parent: reference for tank who shooted
+    """
+    super().__init__(None, **kwargs)
+    self.parent = parent
+
   def update(self, dt):
     """Destroy scene bricks when hit them."""
+    hit = False
     if Game.current_scene.testCollision(self.rect):
       Game.current_scene.damage(self.rect, Vector2.normalize(self.vel))
+      hit = True
+    for obj in Game.all_objects:
+      if (hasattr(obj, "testCollision") and self != obj and
+          self.parent != obj and obj.testCollision(self.rect)):
+        Game.all_objects.remove(obj)
+        hit = True
+    if hit:
       Game.all_objects.remove(self)
     super().update(dt)
 

@@ -6,6 +6,7 @@ import pygame
 from pygame import gfxdraw
 import Game
 from GameObject import PlayerTank
+from Enemy import EnemyTank
 from Spawner import Spawner
 
 
@@ -53,6 +54,9 @@ class Scene():
       pass  # empty cell
     elif cell == 'p':
       Game.all_objects.append(Spawner(PlayerTank, pos=(pos * self.cellSize), size=self.cellSize))
+    elif cell == 'e':
+      Game.all_objects.append(Spawner(EnemyTank, numSpawns=10,
+                                      pos=(pos * self.cellSize), size=self.cellSize))
     else:
       assert False, f"Unknown cell type \"{cell}\""
 

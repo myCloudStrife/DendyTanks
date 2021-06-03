@@ -42,7 +42,7 @@ class Spawner(GameObject):
 
   def render(self, screen):
     """Draw some animation before spawn."""
-    if self.cooldown > 0 and self.cooldown < 1:
+    if self.cooldown > 0 and self.cooldown < 1 and self.spawnsLeft > 0:
       x, y = self.rect.center
       r = self.rect.w * (1.0 - self.cooldown) * 0.5
       endAngle = self.startAngle + (1.0 - self.cooldown) * 360
