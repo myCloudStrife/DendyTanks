@@ -4,6 +4,9 @@ from pygame.math import Vector2
 from pygame.rect import Rect
 import pygame
 from pygame import gfxdraw
+import Game
+from GameObject import PlayerTank
+from Spawner import Spawner
 
 
 class Scene():
@@ -48,6 +51,8 @@ class Scene():
       self.bricks.append(Rect(pos * self.cellSize, Vector2(1, 1) * self.cellSize))
     elif cell == '.':
       pass  # empty cell
+    elif cell == 'p':
+      Game.all_objects.append(Spawner(PlayerTank, pos=(pos * self.cellSize), size=self.cellSize))
     else:
       assert False, f"Unknown cell type \"{cell}\""
 

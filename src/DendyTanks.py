@@ -3,9 +3,7 @@
 import sys
 import os
 import pygame
-from pygame.math import Vector2
 from time import time
-from GameObject import PlayerTank
 from Scene import Scene
 from pygame import freetype
 import Game
@@ -29,8 +27,6 @@ class DendyTanks:
     self.sceneSurface = pygame.Surface(Game.current_scene.bbox.size)
     print("Use {}x{} texture for intermediate rendering".format(
       self.sceneSurface.get_width(), self.sceneSurface.get_height()))
-
-    Game.all_objects.append(PlayerTank(pos=Vector2(320, 240), size=Game.current_scene.cellSize))
 
     myfont = freetype.SysFont("Liberation Sans", 30)
     text = _("Use arrows (←, ↑, →, ↓) to move your tank.")
