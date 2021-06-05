@@ -3,3 +3,5 @@
 
 current_scene = None
 all_objects = []
+current_mode = None
+ui_manager = None

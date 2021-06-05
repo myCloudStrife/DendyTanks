@@ -4,14 +4,9 @@ import sys
 import os
 import pygame
 from time import time
-from Scene import Scene
-from pygame import freetype
 import Game
-import gettext
-
-# todo: move it outside from here, because now localization not work when run not from
-# project root folder. maybe create separate file with only localization messages
-gettext.install("all", "localization")
+import pygame_gui
+from MainMenu import MainMenu
 
 
 class DendyTanks:
@@ -21,16 +16,11 @@ class DendyTanks:
     pygame.init()
     self.screenWidth = 640
     self.screenHeight = 480
-    self.screen = pygame.display.set_mode((640, 480))
+    screenSize = (self.screenWidth, self.screenHeight)
+    self.screen = pygame.display.set_mode(screenSize)
+    Game.ui_manager = pygame_gui.UIManager(screenSize)
     self.time = time()
-    Game.current_scene = Scene("res/level0.txt")
-    self.sceneSurface = pygame.Surface(Game.current_scene.bbox.size)
-    print("Use {}x{} texture for intermediate rendering".format(
-      self.sceneSurface.get_width(), self.sceneSurface.get_height()))
-
-    myfont = freetype.SysFont("Liberation Sans", 30)
-    text = _("Use arrows (←, ↑, →, ↓) to move your tank.")
-    self.tutorialMsg, rect = myfont.render(text, (255, 255, 255))
+    MainMenu()
 
   def mainloop(self):
     while 1:
@@ -44,17 +34,20 @@ class DendyTanks:
     dt = self.time - prevTime
     for obj in Game.all_objects:
       obj.update(dt)
+    Game.ui_manager.update(dt)
 
   def render(self):
     backGroundColor = (20, 20, 100)
     self.screen.fill(backGroundColor)
-    Game.current_scene.render(self.sceneSurface)
-    for obj in Game.all_objects:
-      obj.render(self.sceneSurface)
-    sceneSubsurface = self.screen.subsurface(0, 0, self.screenHeight, self.screenHeight)
-    pygame.transform.smoothscale(self.sceneSurface, (self.screenHeight, self.screenHeight),
-                                 sceneSubsurface)
-    self.screen.blit(self.tutorialMsg, (0, 0))
+    if Game.current_scene is not None:
+      Game.current_scene.render()
+      sceneSurface = Game.current_scene.surface
+      for obj in Game.all_objects:
+        obj.render(sceneSurface)
+      screenSubsurface = self.screen.subsurface(0, 0, self.screenHeight, self.screenHeight)
+      pygame.transform.smoothscale(sceneSurface, (self.screenHeight, self.screenHeight),
+                                   screenSubsurface)
+    Game.ui_manager.draw_ui(self.screen)
     pygame.display.flip()
 
   def handleEvents(self):
@@ -63,6 +56,8 @@ class DendyTanks:
         sys.exit()
       for obj in Game.all_objects:
         obj.handleEvent(event)
+      Game.ui_manager.process_events(event)
+      Game.current_mode.handleEvent(event)
 
 
 def main():

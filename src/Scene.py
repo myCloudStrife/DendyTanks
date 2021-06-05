@@ -16,6 +16,7 @@ class Scene():
   :var pygame.Rect bbox: scene bounding box
   :var int cellSize: size of single cell, for both X and Y axis
   :var list[pygame.Rect] bricks: list with brick blocks
+  :var pygame.Surface surface: texture for scene rendering
   """
 
   def __init__(self, sceneName):
@@ -41,6 +42,9 @@ class Scene():
     self.bricksImage = pygame.image.load("res/bricks.png")
     halfSize = self.cellSize // 2
     self.bricksImage = pygame.transform.scale(self.bricksImage, (halfSize, halfSize))
+    self.surface = pygame.Surface(self.bbox.size)
+    print("Use {}x{} texture for intermediate rendering".format(
+      self.surface.get_width(), self.surface.get_height()))
 
   def _processCell(self, cell, pos):
     """Add cell to scene.
@@ -68,18 +72,14 @@ class Scene():
     fittedRect = rect.clamp(self.bbox)
     return fittedRect.topleft != rect.topleft or rect.collidelist(self.bricks) != -1
 
-  def render(self, screen):
-    """Draw scene.
-
-    :param pygame.Surface screen: surface where you want to draw scene
-    """
+  def render(self):
+    """Draw scene into its texture."""
     backgroundColor = (0, 0, 0)
-    screen.fill(backgroundColor)
-    assert(screen.get_size() == self.bbox.size)
+    self.surface.fill(backgroundColor)
 
     for brick in self.bricks:
       points = [brick.topleft, brick.topright, brick.bottomright, brick.bottomleft]
-      gfxdraw.textured_polygon(screen, points, self.bricksImage, 2, -1)
+      gfxdraw.textured_polygon(self.surface, points, self.bricksImage, 2, -1)
 
   def damage(self, rect, direction):
     """Damage scene obstacles.

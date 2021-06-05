@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-19 16:07+0300\n"
+"POT-Creation-Date: 2021-06-05 17:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: src/DendyTanks.py:26
+#: src/Localization.py:6
 msgid "Use arrows (←, ↑, →, ↓) to move your tank."
+msgstr ""
+
+#: src/Localization.py:7
+msgid "space"
+msgstr ""
+
+#: src/Localization.py:8
+msgid "Tutorial"
+msgstr ""
+
+#: src/Localization.py:9
+msgid "Play"
+msgstr ""
+
+#: src/Localization.py:10
+msgid "Language"
+msgstr ""
+
+#: src/Localization.py:11
+msgid "Apply"
 msgstr ""
 

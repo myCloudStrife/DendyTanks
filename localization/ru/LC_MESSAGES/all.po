@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-19 16:07+0300\n"
+"POT-Creation-Date: 2021-06-05 17:55+0300\n"
 "PO-Revision-Date: 2021-04-19 16:16+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,7 +19,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: src/DendyTanks.py:26
+#: src/Localization.py:6
 msgid "Use arrows (←, ↑, →, ↓) to move your tank."
-msgstr "Используйте стрелочки (←, ↑, →, ↓), чтобы двигать ваш танк."
+msgstr "Используйте стрелочки (←, ↑, →, ↓), чтобы управлять вашим танком."
+
+#: src/Localization.py:7
+msgid "space"
+msgstr ""
+
+#: src/Localization.py:8
+msgid "Tutorial"
+msgstr "Обучение"
+
+#: src/Localization.py:9
+msgid "Play"
+msgstr "Играть"
+
+#: src/Localization.py:10
+msgid "Language"
+msgstr "Язык"
+
+#: src/Localization.py:11
+msgid "Apply"
+msgstr "Принять"
 

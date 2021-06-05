@@ -1,0 +1,11 @@
+{
+  "text_box":
+  {
+    "colours":
+    {
+      "dark_bg":"#00000000",
+      "normal_border":"#00000000",
+      "normal_text":"#ffffffff"
+    }
+  }
+}
