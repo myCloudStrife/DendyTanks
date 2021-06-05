@@ -35,6 +35,7 @@ class DendyTanks:
     for obj in Game.all_objects:
       obj.update(dt)
     Game.ui_manager.update(dt)
+    Game.current_mode.update(dt)
 
   def render(self):
     backGroundColor = (20, 20, 100)

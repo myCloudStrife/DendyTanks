@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-05 17:55+0300\n"
+"POT-Creation-Date: 2021-06-05 20:50+0300\n"
 "PO-Revision-Date: 2021-04-19 16:16+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -24,22 +24,29 @@ msgid "Use arrows (←, ↑, →, ↓) to move your tank."
 msgstr "Используйте стрелочки (←, ↑, →, ↓), чтобы управлять вашим танком."
 
 #: src/Localization.py:7
-msgid "space"
-msgstr ""
+msgid ""
+"Use the spacebar to shoot. This way you can destroy enemy tanks and break"
+" walls."
+msgstr "Используйте кнопку пробел для стрельбы. Таким образом вы можете"
+"можете уничтожать вражеские танки и рушить стены."
 
-#: src/Localization.py:8
+#: src/Localization.py:9
+msgid "Kill enemies."
+msgstr "Убейте врагов."
+
+#: src/Localization.py:10
 msgid "Tutorial"
 msgstr "Обучение"
 
-#: src/Localization.py:9
+#: src/Localization.py:11
 msgid "Play"
 msgstr "Играть"
 
-#: src/Localization.py:10
+#: src/Localization.py:12
 msgid "Language"
 msgstr "Язык"
 
-#: src/Localization.py:11
+#: src/Localization.py:13
 msgid "Apply"
 msgstr "Принять"
 

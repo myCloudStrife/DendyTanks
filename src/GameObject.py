@@ -84,7 +84,7 @@ class PlayerTank(CollidableGameObject):
         self.pressedKeys.append(event.key)
 
     elif event.type == pygame.KEYUP:
-      if event.key in (pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT):
+      if event.key in self.pressedKeys:
         self.pressedKeys.remove(event.key)
 
     self.updateVelocity()

@@ -1,0 +1,13 @@
+.............
+b..e..e..e..b
+bb.........bb
+bbbbbbbbbbbbb
+bbbbbbbbbbbbb
+bbbbb...bbbbb
+bbbb..e..bbbb
+bbbbb...bbbbb
+bbbbbbbbbbbbb
+bbbbbbbbbbbbb
+bb.........bb
+b.....p.....b
+.............

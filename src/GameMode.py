@@ -29,4 +29,4 @@ class DefaultGameMode(GameMode):
   def __init__(self) -> None:
     """Load scene."""
     super().__init__()
-    Game.current_scene = Scene("res/level0.txt")
+    Game.current_scene = Scene("res/levels/level0.txt")
