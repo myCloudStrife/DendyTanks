@@ -1,0 +1,6 @@
+.vscode
+*.xcf
+docs/build
+docs/source/_build
+__pycache__
+*.mo
