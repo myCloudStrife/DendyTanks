@@ -62,6 +62,11 @@ class CollidableGameObject(GameObject):
       self.pos = oldPos
       self.rect.topleft = self.pos
 
+  def shoot(self, pos, size, vel, color):
+    bullet = Bullet(self, pos=pos, size=size, color=color)
+    bullet.vel = vel
+    Game.all_objects.append(bullet)
+
 
 class PlayerTank(CollidableGameObject):
   """
@@ -93,9 +98,9 @@ class PlayerTank(CollidableGameObject):
       bulletSize = halfCellSize // 2
       bulletCenter = self.rect.center + self.direction * (halfCellSize + bulletSize / 2)
       bulletPos = bulletCenter - Vector2(bulletSize / 2, bulletSize / 2)
-      bullet = Bullet(self, pos=bulletPos, size=bulletSize)
-      bullet.vel = self.direction * 4 * self.rect.w
-      Game.all_objects.append(bullet)
+      bulletVel = self.direction * 4 * self.rect.w
+      bulletColor = (255, 255, 255)
+      self.shoot(bulletPos, bulletSize, bulletVel, bulletColor)
 
   def updateVelocity(self):
     """Update tank's velocity based on pressed keys."""
@@ -130,13 +135,14 @@ class PlayerTank(CollidableGameObject):
 class Bullet(GameObject):
   """Bullet object."""
 
-  def __init__(self, parent, **kwargs):
+  def __init__(self, parent, color, **kwargs):
     """Construct bullet.
 
     :param GameObject parent: reference for tank who shooted
     """
     super().__init__(None, **kwargs)
     self.parent = parent
+    self.color = color
 
   def update(self, dt):
     """Destroy scene bricks when hit them."""
@@ -156,4 +162,4 @@ class Bullet(GameObject):
   def render(self, screen):
     """Render bullet to the screen."""
     pygame.gfxdraw.filled_circle(screen, self.rect.centerx, self.rect.centery,
-                                 self.rect.w // 2, (255, 255, 255))
+                                 self.rect.w // 2, self.color)
