@@ -7,6 +7,7 @@ from time import time
 import Game
 import pygame_gui
 from MainMenu import MainMenu
+from Enemy import EnemyTank
 
 
 class DendyTanks:
@@ -56,9 +57,13 @@ class DendyTanks:
       if event.type == pygame.QUIT:
         sys.exit()
       for obj in Game.all_objects:
-        obj.handleEvent(event)
+        if type(obj) != EnemyTank:
+          obj.handleEvent(event)
       Game.ui_manager.process_events(event)
       Game.current_mode.handleEvent(event)
+    for obj in Game.all_objects:
+      if type(obj) == EnemyTank:
+        obj.handleEvent(None)
 
 
 def main():
