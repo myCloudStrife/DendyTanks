@@ -23,3 +23,7 @@ jobs:
         run: pydocstyle
       - name: Build
         run: python -m build
+      - name: Build localization
+        run: cd DendyTanks/localization && make
+      - name: Build docs
+        run: cd docs/ && make
