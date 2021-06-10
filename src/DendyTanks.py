@@ -14,6 +14,7 @@ class DendyTanks:
   """Main class for DendyTanks game."""
 
   def __init__(self):
+    """Init app window and some other similar stuff, then run main menu."""
     pygame.init()
     self.screenWidth = 640
     self.screenHeight = 480
@@ -24,12 +25,14 @@ class DendyTanks:
     MainMenu()
 
   def mainloop(self):
+    """App mainloop, iteratively call `handleEvents`, `update` and `render`."""
     while 1:
       self.handleEvents()
       self.update()
       self.render()
 
   def update(self):
+    """Calculete delta time, then update all objects and UI."""
     prevTime = self.time
     self.time = time()
     dt = self.time - prevTime
@@ -39,6 +42,7 @@ class DendyTanks:
     Game.current_mode.update(dt)
 
   def render(self):
+    """Draw scene, all objects, UI and then display backbuffer."""
     backGroundColor = (20, 20, 100)
     self.screen.fill(backGroundColor)
     if Game.current_scene is not None:
@@ -53,6 +57,7 @@ class DendyTanks:
     pygame.display.flip()
 
   def handleEvents(self):
+    """Forward all events from pygame to game objects and UI."""
     for event in pygame.event.get():
       if event == pygame.event.Event(pygame.USEREVENT, attr1='MAINMENU'):
         MainMenu()

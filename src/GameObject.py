@@ -66,6 +66,7 @@ class CollidableGameObject(GameObject):
       self.rect.topleft = self.pos
 
   def shoot(self, pos, size, vel, color):
+    """Create bullet."""  # todo: create tank class and move it there.
     bullet = Bullet(self, pos=pos, size=size, color=color)
     bullet.vel = vel
     Game.all_objects.append(bullet)
@@ -183,11 +184,14 @@ class Bullet(GameObject):
 
 
 class Stats(GameObject):
-  """Player stats object."""
-  """"HP; kills; """
+  """Player stats object.
+
+  HP; kills;
+  """
 
   def __init__(self, parent, color, **kwargs):
     """Construct users'stats.
+
     :param GameObject parent: reference for user's tank
     """
     super().__init__(None, **kwargs)

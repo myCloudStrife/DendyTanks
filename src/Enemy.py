@@ -21,6 +21,7 @@ class EnemyTank(CollidableGameObject):
     random.seed(random.randint(0, 30), version=2)
 
   def updateDirection(self):
+    """Rotate tank (and do some movements?)."""
     move = random.randint(0, 10)
     if 0 <= move <= 3:
       prevPos = self.pos.xy
@@ -49,8 +50,7 @@ class EnemyTank(CollidableGameObject):
       self.rect.topleft = self.pos
 
   def handleEvent(self, event):
-    """Enemy movement logic"""
-
+    """Enemy movement logic."""
     if self.is_active is True and random.uniform(0.0, 1.0) < self.p_upd_dir:
       self.updateDirection()
 
