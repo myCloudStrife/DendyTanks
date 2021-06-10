@@ -220,8 +220,9 @@ class Stats(GameObject):
       "<font size=\"5\" face=\"Arial\">" + f"{hp_string}" + "<br />" +
       f"{kills_string}" + "</font>", hintRect, Game.ui_manager)
 
+
 class GameOver(GameObject):
-  """PGame Over screen object.
+  """Game Over screen object.
 
   Show GAME OVER text and press button to exit to menu.
   """
@@ -250,4 +251,5 @@ class GameOver(GameObject):
     self.text = pygame_gui.elements.UITextBox(
       "<font size=\"7\" face=\"Arial\">" + tmp + f"{Localization.GAME_OVER}" + "</font>" +
       "<br />" +
-      "<font size=\"3\" face=\"Arial\">" + f"{Localization.BACK_TO_MENU}" + "</font>", hintRect, Game.ui_manager)
+      "<font size=\"3\" face=\"Arial\">" + f"{Localization.BACK_TO_MENU}" + "</font>",
+      hintRect, Game.ui_manager)
