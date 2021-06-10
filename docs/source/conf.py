@@ -2,7 +2,9 @@
 # -*- coding: UTF-8 -*-
 
 """
-doc config
+This is an docs config.
+
+Config for generate documentation.
 """
 # Configuration file for the Sphinx documentation builder.
 #
