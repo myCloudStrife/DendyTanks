@@ -1,7 +1,8 @@
 """Module with GameObject class."""
 import pygame
-from pygame.math import Vector2
+import pygame_gui
 from pygame import Rect
+from pygame.math import Vector2
 import Game
 
 
@@ -83,6 +84,11 @@ class PlayerTank(CollidableGameObject):
         self.baseImage = self.image.copy()
         self.direction = Vector2(0, -1)
         self.is_active = True
+        self.hp = 100
+        self.kills = 0
+        stats = Stats(self, color=(255, 1, 1))
+        Game.all_objects.append(stats)
+
 
     def handleEvent(self, event):
         """Handle movements keys and shoot key."""
@@ -166,3 +172,36 @@ class Bullet(GameObject):
         """Render bullet to the screen."""
         pygame.gfxdraw.filled_circle(screen, self.rect.centerx, self.rect.centery,
                                      self.rect.w // 2, self.color)
+
+
+class Stats(GameObject):
+  """Player stats object."""
+  """"HP; kills; """
+
+  def __init__(self, parent, color, **kwargs):
+    """Construct users'stats.
+    :param GameObject parent: reference for user's tank
+    """
+    super().__init__(None, **kwargs)
+    self.parent = parent
+    self.color = color
+    self.max_hp = 100
+    self.hp = self.parent.hp
+    self.kills = self.parent.kills
+    self.text = None
+    self.text_height = 100
+    Game.ui_manager.preload_fonts([{'name': 'fira_code', 'point_size': 18, 'style': 'regular'}])
+
+  def update(self, dt):
+    """Update user stats."""
+    self.hp = self.parent.hp
+    self.kills = self.parent.kills
+    hp_string = "HP: " + str(self.hp) + "/" + str(self.max_hp)
+    kills_string = "Kills: " + str(self.kills)
+
+    screenSize = Game.ui_manager.window_resolution
+    hintRect = Rect(0, 0, screenSize[1], self.text_height)
+    if self.text is not None:
+        self.text.kill()
+    self.text = pygame_gui.elements.UITextBox(
+      "<font size=\"5\">" + f"{hp_string}" + "<br />" + f"{kills_string}" + "</font>", hintRect, Game.ui_manager)
