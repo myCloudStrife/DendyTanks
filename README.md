@@ -8,7 +8,8 @@
 
 ## Задача
 
-Реализовать игру в стиле **Танчиков**. Пример геймплея: https://www.youtube.com/watch?v=MPsA5PtfdL0
+Реализовать игру в стиле **Танчиков**. Пример геймплея:
+[![Watch the video](https://img.youtube.com/vi/MPsA5PtfdL0/maxresdefault.jpg)](https://www.youtube.com/watch?v=MPsA5PtfdL0)
 
 ## План минимум
 
