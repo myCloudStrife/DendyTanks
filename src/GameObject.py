@@ -88,8 +88,9 @@ class PlayerTank(CollidableGameObject):
     self.is_active = True
     self.hp = 100
     self.kills = 0
-    stats = Stats(self, color=(255, 1, 1))
-    Game.all_objects.append(stats)
+    if Game.stats_required:
+      stats = Stats(self, color=(255, 1, 1))
+      Game.all_objects.append(stats)
 
   def handleEvent(self, event):
     """Handle movements keys and shoot key."""

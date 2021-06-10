@@ -20,6 +20,7 @@ class Tutorial(GameMode):
   def __init__(self) -> None:
     """Load special scene."""
     super().__init__()
+    Game.stats_required = False
     Game.current_scene = Scene("res/levels/tutorial.txt")
     self.curTime = 0.0
     self.moveHint = False
@@ -84,6 +85,7 @@ class Tutorial(GameMode):
         hintRect, Game.ui_manager)
 
     if self.killHint and numEnemies == 0:
+      Game.stats_required = True
       MainMenu.MainMenu()  # todo: show some message
 
     self.prevEnemies = numEnemies
