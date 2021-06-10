@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
-
-"""
-This is an docs config.
-
-Config for generate documentation.
-"""
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full

@@ -20,6 +20,6 @@ jobs:
       - name: Run flake8
         run: flake8
       - name: Run pydocstyle
-        run: pydocstyle docs/
+        run: pydocstyle
       - name: Build
         run: python -m build
