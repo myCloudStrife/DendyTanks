@@ -1,14 +1,14 @@
 """Main menu module."""
 
-import Game
+from . import Game
 import pygame_gui
 import pygame
-from GameMode import GameMode, DefaultGameMode
+from .GameMode import GameMode, DefaultGameMode
 from pygame import Rect
-import Localization
+from . import Localization
 import importlib
 import os
-from Tutorial import Tutorial
+from .Tutorial import Tutorial
 
 
 class MainMenu(GameMode):

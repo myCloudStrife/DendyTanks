@@ -4,10 +4,10 @@ from pygame.math import Vector2
 from pygame.rect import Rect
 import pygame
 from pygame import gfxdraw
-import Game
-from GameObject import PlayerTank
-from Enemy import EnemyTank
-from Spawner import Spawner
+from . import Game
+from .GameObject import PlayerTank
+from .Enemy import EnemyTank
+from .Spawner import Spawner
 
 
 class Scene():

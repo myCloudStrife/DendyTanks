@@ -1,7 +1,7 @@
 """Game mode interface."""
 
-import Game
-from Scene import Scene
+from . import Game
+from .Scene import Scene
 
 
 class GameMode:

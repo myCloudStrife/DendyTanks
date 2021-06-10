@@ -3,8 +3,8 @@ import pygame
 import pygame_gui
 from pygame import Rect
 from pygame.math import Vector2
-import Game
-import Localization
+from . import Game
+from . import Localization
 
 
 class GameObject():

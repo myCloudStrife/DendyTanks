@@ -1,10 +1,10 @@
 """Spawner that can spawn tanks (player and enemies)."""
 
-from GameObject import GameObject
-import Game
+from .GameObject import GameObject
+from . import Game
 from pygame import gfxdraw
 import random
-from Enemy import EnemyTank
+from .Enemy import EnemyTank
 
 
 class Spawner(GameObject):

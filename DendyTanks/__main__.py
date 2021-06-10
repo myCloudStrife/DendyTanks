@@ -4,10 +4,10 @@ import sys
 import os
 import pygame
 from time import time
-import Game
+from . import Game
 import pygame_gui
-from MainMenu import MainMenu
-from Enemy import EnemyTank
+from .MainMenu import MainMenu
+from .Enemy import EnemyTank
 
 
 class DendyTanks:
@@ -76,8 +76,8 @@ class DendyTanks:
 def main():
   """Change working directory to project folder and call mainloop."""
   srcDir = os.path.dirname(__file__)
-  projectDir = os.path.join(srcDir, "..")
-  os.chdir(projectDir)
+  # //projectDir = os.path.join(srcDir, "..")
+  os.chdir(srcDir)
   DendyTanks().mainloop()
 
 

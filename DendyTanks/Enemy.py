@@ -1,8 +1,8 @@
 """Enemy tank."""
 
 import pygame
-import Game
-from GameObject import CollidableGameObject
+from . import Game
+from .GameObject import CollidableGameObject
 from pygame.math import Vector2
 import random
 

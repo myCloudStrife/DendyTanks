@@ -1,16 +1,16 @@
 """Tutorial game mode."""
 
-from GameMode import GameMode
-import Game
-import MainMenu
-from Scene import Scene
-import Localization
+from .GameMode import GameMode
+from . import Game
+from . import MainMenu
+from .Scene import Scene
+from . import Localization
 import pygame
 import pygame_gui
 from pygame import Rect
-from GameObject import PlayerTank
-from Enemy import EnemyTank
-from Spawner import Spawner
+from .GameObject import PlayerTank
+from .Enemy import EnemyTank
+from .Spawner import Spawner
 from pygame.math import Vector2
 
 

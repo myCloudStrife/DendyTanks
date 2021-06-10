@@ -1,5 +1,8 @@
 .vscode
 *.xcf
+build
+dist
+DendyTanks.egg-info
 docs/build
 docs/source/_build
 __pycache__
