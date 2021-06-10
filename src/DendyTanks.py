@@ -54,6 +54,11 @@ class DendyTanks:
 
     def handleEvents(self):
         for event in pygame.event.get():
+            if event == pygame.event.Event(pygame.USEREVENT, attr1='MAINMENU'):
+                pygame.event.clear()
+                Game.all_objects[:] = []
+                MainMenu()
+                break
             if event.type == pygame.QUIT:
                 sys.exit()
             for obj in Game.all_objects:

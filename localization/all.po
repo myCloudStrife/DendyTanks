@@ -47,3 +47,10 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
+#: src/Localization.py:14
+msgid "HP"
+msgstr ""
+
+#: src/Localization.py:15
+msgid "Kills"
+msgstr ""

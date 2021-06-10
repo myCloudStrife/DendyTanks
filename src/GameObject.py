@@ -4,6 +4,7 @@ import pygame_gui
 from pygame import Rect
 from pygame.math import Vector2
 import Game
+import Localization
 
 
 class GameObject():
@@ -162,7 +163,15 @@ class Bullet(GameObject):
             if (hasattr(obj, "testCollision") and self != obj and
                     self.parent != obj and type(self.parent) != type(obj) and
                     obj.testCollision(self.rect) and obj.is_active is True):
-                Game.all_objects.remove(obj)
+                if(type(self.parent) == PlayerTank):
+                    self.parent.kills += 1
+                    Game.all_objects.remove(obj)
+                elif type(obj) == PlayerTank:
+                    obj.hp -= 50
+                    if obj.hp <= 0:
+                        Game.all_objects.remove(obj)
+                        main_menu_event = pygame.event.Event(pygame.USEREVENT, attr1='MAINMENU')
+                        pygame.event.post(main_menu_event)
                 hit = True
         if hit:
             Game.all_objects.remove(self)
@@ -196,8 +205,8 @@ class Stats(GameObject):
     """Update user stats."""
     self.hp = self.parent.hp
     self.kills = self.parent.kills
-    hp_string = "HP: " + str(self.hp) + "/" + str(self.max_hp)
-    kills_string = "Kills: " + str(self.kills)
+    hp_string = Localization.STATS_HP + ": " + str(self.hp) + "/" + str(self.max_hp)
+    kills_string = Localization.STATS_KILLS + ": " + str(self.kills)
 
     screenSize = Game.ui_manager.window_resolution
     hintRect = Rect(0, 0, screenSize[1], self.text_height)

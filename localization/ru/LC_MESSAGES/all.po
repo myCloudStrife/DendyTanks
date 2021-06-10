@@ -50,3 +50,10 @@ msgstr "Язык"
 msgid "Apply"
 msgstr "Принять"
 
+#: src/Localization.py:14
+msgid "HP"
+msgstr "Здоровье"
+
+#: src/Localization.py:15
+msgid "Kills"
+msgstr "Убийств"

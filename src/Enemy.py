@@ -21,7 +21,7 @@ class EnemyTank(CollidableGameObject):
         random.seed(random.randint(0, 30), version=2)
 
     def updateDirection(self):
-        move = random.randint(0, 30)
+        move = random.randint(0, 10)
         if 0 <= move <= 3:
             prevPos = self.pos.xy
             direct = Vector2(0, 0)
