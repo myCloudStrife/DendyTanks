@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-05 20:50+0300\n"
+"POT-Creation-Date: 2021-06-10 17:37+0300\n"
 "PO-Revision-Date: 2021-04-19 16:16+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,41 +19,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: src/Localization.py:6
+#: ../src/Localization.py:6
 msgid "Use arrows (←, ↑, →, ↓) to move your tank."
 msgstr "Используйте стрелочки (←, ↑, →, ↓), чтобы управлять вашим танком."
 
-#: src/Localization.py:7
+#: ../src/Localization.py:7
 msgid ""
 "Use the spacebar to shoot. This way you can destroy enemy tanks and break"
 " walls."
-msgstr "Используйте кнопку пробел для стрельбы. Таким образом вы можете"
-"можете уничтожать вражеские танки и рушить стены."
+msgstr ""
+"Используйте кнопку пробел для стрельбы. Таким образом вы можете "
+"уничтожать вражеские танки и рушить стены."
 
-#: src/Localization.py:9
+#: ../src/Localization.py:9
 msgid "Kill enemies."
 msgstr "Убейте врагов."
 
-#: src/Localization.py:10
+#: ../src/Localization.py:10
 msgid "Tutorial"
 msgstr "Обучение"
 
-#: src/Localization.py:11
+#: ../src/Localization.py:11
 msgid "Play"
 msgstr "Играть"
 
-#: src/Localization.py:12
+#: ../src/Localization.py:12
 msgid "Language"
 msgstr "Язык"
 
-#: src/Localization.py:13
+#: ../src/Localization.py:13
 msgid "Apply"
 msgstr "Принять"
 
-#: src/Localization.py:14
+#: ../src/Localization.py:14
 msgid "HP"
 msgstr "Здоровье"
 
-#: src/Localization.py:15
+#: ../src/Localization.py:15
 msgid "Kills"
 msgstr "Убийств"
+
