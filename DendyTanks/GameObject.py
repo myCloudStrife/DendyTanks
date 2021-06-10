@@ -238,7 +238,6 @@ class GameOver(GameObject):
 
   def update(self, dt):
     """Update text"""
-
     screenSize = Game.ui_manager.window_resolution
     x, y, w, h = 0.15, 0.2, 0.6, 0.2
     hintRect = Rect(x * screenSize[0], y * screenSize[1], w * screenSize[0], h * screenSize[1])
