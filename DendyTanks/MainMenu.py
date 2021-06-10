@@ -8,7 +8,7 @@ from pygame import Rect
 from . import Localization
 import importlib
 import os
-from .Tutorial import Tutorial
+from . import Tutorial
 
 
 class MainMenu(GameMode):
@@ -48,7 +48,7 @@ class MainMenu(GameMode):
     """Check if any button is pressed."""
     if event.type == pygame.USEREVENT and event.user_type == pygame_gui.UI_BUTTON_PRESSED:
       if event.ui_element == self.tutorialButton:
-        Tutorial()
+        Tutorial.Tutorial()
       elif event.ui_element == self.playButton:
         DefaultGameMode()
       elif event.ui_element == self.langButton:
