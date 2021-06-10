@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+"""
+doc config
+"""
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
