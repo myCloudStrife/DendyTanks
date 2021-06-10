@@ -217,5 +217,36 @@ class Stats(GameObject):
     if self.text is not None:
       self.text.kill()
     self.text = pygame_gui.elements.UITextBox(
-      "<font size=\"5\">" + f"{hp_string}" + "<br />" +
+      "<font size=\"5\" color=\"red\">" + f"{hp_string}" + "<br />" +
       f"{kills_string}" + "</font>", hintRect, Game.ui_manager)
+
+# class GameOverScreen(GameObject):
+#   """Player stats object.
+#
+#   HP; kills;
+#   """
+#
+#   def __init__(self, **kwargs):
+#     """Game Over screen
+#
+#     :param GameObject parent: reference for user's tank
+#     """
+#     super().__init__(None, **kwargs)
+#     self.text = None
+#     self.text_height = 100
+#     Game.ui_manager.preload_fonts([{'name': 'fira_code', 'point_size': 25, 'style': 'regular', 'color': 'red'}])
+#
+#   def update(self, dt):
+#     """Update user stats."""
+#     self.hp = self.parent.hp
+#     self.kills = self.parent.kills
+#     hp_string = Localization.STATS_HP + ": " + str(self.hp) + "/" + str(self.max_hp)
+#     kills_string = Localization.STATS_KILLS + ": " + str(self.kills)
+#
+#     screenSize = Game.ui_manager.window_resolution
+#     hintRect = Rect(0, 0, screenSize[1], self.text_height)
+#     if self.text is not None:
+#       self.text.kill()
+#     self.text = pygame_gui.elements.UITextBox(
+#       "<font size=\"5\">" + f"{hp_string}" + "<br />" +
+#       f"{kills_string}" + "</font>", hintRect, Game.ui_manager)

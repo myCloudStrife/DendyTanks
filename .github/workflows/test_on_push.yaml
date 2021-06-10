@@ -18,12 +18,12 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run flake8
-        run: flake8
+        run: flake8 -v
       - name: Run pydocstyle
-        run: pydocstyle
+        run: pydocstyle -v
       - name: Build
         run: python -m build
       - name: Build localization
         run: cd DendyTanks/localization && make
       - name: Build docs
-        run: cd docs/ && make
+        run: cd docs/ && make html
