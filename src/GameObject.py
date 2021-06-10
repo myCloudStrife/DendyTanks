@@ -171,7 +171,7 @@ class Bullet(GameObject):
           obj.hp -= 50
           if obj.hp <= 0:
             Game.all_objects.remove(obj)
-            main_menu_event = pygame.event.Event(pygame.USEREVENT, attr1='MAINMENU')
+            main_menu_event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU')
             pygame.event.post(main_menu_event)
         hit = True
     if hit:

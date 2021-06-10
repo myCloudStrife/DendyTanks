@@ -59,7 +59,7 @@ class DendyTanks:
   def handleEvents(self):
     """Forward all events from pygame to game objects and UI."""
     for event in pygame.event.get():
-      if event == pygame.event.Event(pygame.USEREVENT, attr1='MAINMENU'):
+      if event.type == pygame.USEREVENT and event.user_type == "MAINMENU":
         MainMenu()
       if event.type == pygame.QUIT:
         sys.exit()
