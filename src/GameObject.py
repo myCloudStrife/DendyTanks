@@ -17,7 +17,7 @@ class GameObject():
     :param pygame.math.Vector2 pos: object's initial position
     :param int size: size for object's Rect
     """
-    self.pos = pos
+    self.pos = Vector2(pos.xy)
     self.vel = Vector2(0, 0)
     self.image = pygame.image.load(resourceName) if resourceName else None
     if self.image:
