@@ -55,3 +55,10 @@ msgstr ""
 msgid "Kills"
 msgstr ""
 
+#: ../Localization.py:16
+msgid "GAME OVER"
+msgstr ""
+
+#: ../Localization.py:17
+msgid "Press any key to return to main menu"
+msgstr ""

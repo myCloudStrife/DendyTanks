@@ -7,6 +7,7 @@ from . import Game
 import pygame_gui
 from .MainMenu import MainMenu
 from .Enemy import EnemyTank
+from .GameObject import GameOver
 
 
 class Application:
@@ -21,6 +22,7 @@ class Application:
     self.screen = pygame.display.set_mode(screenSize)
     Game.ui_manager = pygame_gui.UIManager(screenSize)
     self.time = time()
+    self.game_over_screen = False
     MainMenu()
 
   def mainloop(self):
@@ -59,9 +61,15 @@ class Application:
     """Forward all events from pygame to game objects and UI."""
     for event in pygame.event.get():
       if event.type == pygame.USEREVENT and event.user_type == "MAINMENU":
-        MainMenu()
+        Game.all_objects.append(GameOver())
+        self.game_over_screen = True
+        pygame.event.clear()
       if event.type == pygame.QUIT:
         sys.exit()
+      if self.game_over_screen and event.type == pygame.KEYDOWN:
+        Game.all_objects[:] = []
+        self.game_over_screen = False
+        MainMenu()
       for obj in Game.all_objects:
         if type(obj) != EnemyTank:
           obj.handleEvent(event)

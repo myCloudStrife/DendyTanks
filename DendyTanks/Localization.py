@@ -13,5 +13,7 @@ MAIN_MENU_LANGUAGE = _("Language")
 MAIN_MENU_APPLY = _("Apply")
 STATS_HP = _("HP")
 STATS_KILLS = _("Kills")
+GAME_OVER = _("GAME OVER")
+BACK_TO_MENU = _("Press any key to return to main menu")
 
 SUPPORTED_LANGUAGES = {"English": "en", "Русский": "ru"}

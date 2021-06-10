@@ -59,3 +59,10 @@ msgstr "Здоровье"
 msgid "Kills"
 msgstr "Убийств"
 
+#: ../Localization.py:16
+msgid "GAME OVER"
+msgstr "ИГРА ОКОНЧЕНА"
+
+#: ../Localization.py:17
+msgid "Press any key to return to main menu"
+msgstr "Нажмите любую клавишу, чтобы вернуться в главное меню"
