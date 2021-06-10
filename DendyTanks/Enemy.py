@@ -51,16 +51,16 @@ class EnemyTank(CollidableGameObject):
 
   def handleEvent(self, event):
     """Enemy movement logic."""
-    if self.is_active is True and random.uniform(0.0, 1.0) < self.p_upd_dir:
+    if self.is_active is True and Game.stats_required and random.uniform(0.0, 1.0) < self.p_upd_dir:
       self.updateDirection()
 
-    if self.is_active is True and random.uniform(0.0, 1.0) < self.p_move:
+    if self.is_active is True and Game.stats_required and random.uniform(0.0, 1.0) < self.p_move:
       speed = 2 * self.rect.width
       self.vel = self.direction * speed
     else:
       self.vel = Vector2(0, 0)
 
-    if self.is_active is True and random.uniform(0.0, 1.0) < self.p_shoot:
+    if self.is_active is True and Game.stats_required and random.uniform(0.0, 1.0) < self.p_shoot:
       halfCellSize = self.rect.w / 2
       bulletSize = halfCellSize // 2
       bulletCenter = self.rect.center + self.direction * (halfCellSize + bulletSize / 2)
