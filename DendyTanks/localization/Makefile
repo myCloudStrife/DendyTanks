@@ -1,4 +1,4 @@
-SOURCEDIR = ../src
+SOURCEDIR = ..
 DOMAIN = all
 LOCALE = ru
 

@@ -3,7 +3,7 @@ Modules
 
 GameObject
 ----------
-.. automodule:: GameObject
+.. automodule:: DendyTanks.GameObject
   :show-inheritance:
   :special-members: __init__
   :members:
@@ -14,7 +14,7 @@ GameObject
 
 Scene
 -----
-.. automodule:: Scene
+.. automodule:: DendyTanks.Scene
   :show-inheritance:
   :special-members: __init__
   :members:
@@ -26,7 +26,7 @@ Scene
 
 DendyTanks
 ----------
-.. automodule:: DendyTanks
+.. automodule:: DendyTanks.Application
   :show-inheritance:
   :special-members: __init__
   :members:

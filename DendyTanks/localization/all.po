@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-10 17:37+0300\n"
+"POT-Creation-Date: 2021-06-10 21:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,41 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: ../src/Localization.py:6
+#: ../Localization.py:6
 msgid "Use arrows (←, ↑, →, ↓) to move your tank."
 msgstr ""
 
-#: ../src/Localization.py:7
+#: ../Localization.py:7
 msgid ""
 "Use the spacebar to shoot. This way you can destroy enemy tanks and break"
 " walls."
 msgstr ""
 
-#: ../src/Localization.py:9
+#: ../Localization.py:9
 msgid "Kill enemies."
 msgstr ""
 
-#: ../src/Localization.py:10
+#: ../Localization.py:10
 msgid "Tutorial"
 msgstr ""
 
-#: ../src/Localization.py:11
+#: ../Localization.py:11
 msgid "Play"
 msgstr ""
 
-#: ../src/Localization.py:12
+#: ../Localization.py:12
 msgid "Language"
 msgstr ""
 
-#: ../src/Localization.py:13
+#: ../Localization.py:13
 msgid "Apply"
 msgstr ""
 
-#: ../src/Localization.py:14
+#: ../Localization.py:14
 msgid "HP"
 msgstr ""
 
-#: ../src/Localization.py:15
+#: ../Localization.py:15
 msgid "Kills"
 msgstr ""
 
