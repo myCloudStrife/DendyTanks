@@ -221,33 +221,33 @@ class Stats(GameObject):
       f"{kills_string}" + "</font>", hintRect, Game.ui_manager)
 
 class GameOver(GameObject):
-      """PGame Over screen object.
+  """PGame Over screen object.
 
-      Show GAME OVER text and press button to exit to menu.
+  Show GAME OVER text and press button to exit to menu.
+  """
+
+  def __init__(self, **kwargs):
+      """Construct users'stats.
+
+      :param GameObject parent: reference for user's tank
       """
+      super().__init__(None, **kwargs)
+      self.text = None
+      Game.ui_manager.preload_fonts([{'name': 'fira_code', 'point_size': 48, 'style': 'regular'}])
 
-      def __init__(self, **kwargs):
-          """Construct users'stats.
+  def update(self, dt):
+      """Update text"""
 
-          :param GameObject parent: reference for user's tank
-          """
-          super().__init__(None, **kwargs)
-          self.text = None
-          Game.ui_manager.preload_fonts([{'name': 'fira_code', 'point_size': 48, 'style': 'regular'}])
+      screenSize = Game.ui_manager.window_resolution
+      x, y, w, h = 0.15, 0.2, 0.6, 0.2
+      hintRect = Rect(x * screenSize[0], y * screenSize[1], w * screenSize[0], h * screenSize[1])
 
-      def update(self, dt):
-          """Update text"""
+      size = (len(Localization.BACK_TO_MENU) - len(Localization.GAME_OVER)) // 2
+      tmp = " " * size
 
-          screenSize = Game.ui_manager.window_resolution
-          x, y, w, h = 0.15, 0.2, 0.6, 0.2
-          hintRect = Rect(x * screenSize[0], y * screenSize[1], w * screenSize[0], h * screenSize[1])
-
-          size = (len(Localization.BACK_TO_MENU) - len(Localization.GAME_OVER)) // 2
-          tmp = " " * size
-
-          if self.text is not None:
-            self.text.kill()
-          self.text = pygame_gui.elements.UITextBox(
-            "<font size=\"7\" face=\"Arial\">" + tmp + f"{Localization.GAME_OVER}" + "</font>" +
-            "<br />" +
-            "<font size=\"3\" face=\"Arial\">" + f"{Localization.BACK_TO_MENU}" + "</font>", hintRect, Game.ui_manager)
+      if self.text is not None:
+        self.text.kill()
+      self.text = pygame_gui.elements.UITextBox(
+        "<font size=\"7\" face=\"Arial\">" + tmp + f"{Localization.GAME_OVER}" + "</font>" +
+        "<br />" +
+        "<font size=\"3\" face=\"Arial\">" + f"{Localization.BACK_TO_MENU}" + "</font>", hintRect, Game.ui_manager)
