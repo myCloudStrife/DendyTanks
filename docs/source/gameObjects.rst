@@ -1,8 +1,11 @@
-Modules
-=======
+Game Objects
+============
 
-GameObject
-----------
+GameObject Module
+-----------------
+
+.. attention:: Now we have too many different stuff here...
+
 .. automodule:: DendyTanks.GameObject
   :show-inheritance:
   :special-members: __init__
@@ -11,10 +14,10 @@ GameObject
   :inherited-members:
   :undoc-members:
 
+Enemy Module
+------------
 
-Scene
------
-.. automodule:: DendyTanks.Scene
+.. automodule:: DendyTanks.Enemy
   :show-inheritance:
   :special-members: __init__
   :members:
@@ -22,11 +25,10 @@ Scene
   :inherited-members:
   :undoc-members:
 
+Spawner
+-------
 
-
-DendyTanks
-----------
-.. automodule:: DendyTanks.Application
+.. automodule:: DendyTanks.Spawner
   :show-inheritance:
   :special-members: __init__
   :members:

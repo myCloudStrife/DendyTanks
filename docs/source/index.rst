@@ -10,7 +10,10 @@ Welcome to DendyTanks's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   modules
+   application
+   gameMode
+   scene
+   gameObjects
 
 
 Indices and tables
