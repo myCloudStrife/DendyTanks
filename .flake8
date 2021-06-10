@@ -2,3 +2,4 @@
 indent-size = 2
 max-line-length = 100
 builtins = _
+exclude = docs/

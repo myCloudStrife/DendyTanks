@@ -6,7 +6,6 @@ import pygame
 from pygame import gfxdraw
 import Game
 from GameObject import PlayerTank
-from GameObject import Stats
 from Enemy import EnemyTank
 from Spawner import Spawner
 
