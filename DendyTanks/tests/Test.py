@@ -6,7 +6,9 @@ from pygame.math import Vector2
 from DendyTanks.Application import Application
 from DendyTanks import Game
 from DendyTanks.GameObject import PlayerTank
+from DendyTanks.GameObject import Bullet
 from DendyTanks.Scene import Scene
+from DendyTanks.Enemy import EnemyTank
 from pygame.rect import Rect
 import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -165,6 +167,42 @@ class Test(unittest.TestCase):
                          'test_update_player_tank_pos_right_update')
         self.assertEqual(tmp.direction, Vector2(1, 0), 'test_update_player_tank_dir_right_update')
         self.assertEqual(tmp.vel, Vector2(speed, 0), 'test_update_player_tank_vel_right_update')
+
+    def test_bullet(self):
+        """Test player tank move right."""
+        Game.current_scene = Scene("../res/levels/level0.txt")
+        Game.current_scene.bbox = Rect(Vector2(-100000, -100000),
+                                       Vector2(100000, 100000) * Game.current_scene.cellSize)
+        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU',
+                                   ui_element=self.app.menu.playButton)
+        pygame.event.post(event)
+        enemy = EnemyTank(pos=Vector2(5, 2), size=10)
+        Game.all_objects.append(enemy)
+        player = PlayerTank(pos=Vector2(5, 5), size=10)
+        Game.all_objects.append(player)
+
+        self.assertEqual(player.hp, 100, 'test_bullet_player_hp_init')
+
+        halfCellSize = enemy.rect.w / 2
+        bulletSize = halfCellSize // 2
+        bulletCenter = enemy.rect.center + enemy.direction * (halfCellSize + bulletSize / 2)
+        bulletPos = bulletCenter - Vector2(bulletSize / 2, bulletSize / 2)
+        bulletVel = enemy.direction * 4 * enemy.rect.w
+        bulletColor = (255, 255, 255)
+        enemy.shoot(bulletPos, bulletSize, bulletVel, bulletColor)
+
+        dt = 0.01
+
+        event = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_UP)
+        for obj in Game.all_objects:
+            if type(obj) != Bullet:
+                obj.handleEvent(event)
+                obj.update(dt=dt)
+                obj.pos = Vector2(9, 0)
+                obj.handleEvent(event)
+                obj.update(dt=dt)
+
+        self.assertEqual(player.hp, 100, 'test_bullet_player_hp')
 
     def tearDown(self):
         """Tear down."""
