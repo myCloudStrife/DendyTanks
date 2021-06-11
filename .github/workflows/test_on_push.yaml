@@ -17,6 +17,8 @@ jobs:
           architecture: 'x64'
       - name: Install requirements
         run: pip install -r requirements.txt
+      - name: Install video
+        run: sudo apt install xorg-dev libx11-dev libgl1-mesa-glx
       - name: Run flake8
         run: flake8 -v
       - name: Run pydocstyle

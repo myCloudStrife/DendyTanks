@@ -9,6 +9,7 @@ from DendyTanks.GameObject import PlayerTank
 from DendyTanks.Scene import Scene
 from pygame.rect import Rect
 import os
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
 class Test(unittest.TestCase):
@@ -16,7 +17,6 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         """Det up for test."""
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
         srcDir = os.path.dirname(__file__)
         os.chdir(srcDir)
         self.app = Application()
