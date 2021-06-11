@@ -42,25 +42,26 @@ class EnemyTank(CollidableGameObject):
       self.direction = direct
       self.image = pygame.transform.rotate(self.baseImage, r)
       halfCellSize = self.rect.w / 2
+      self.pos.x = round(self.pos.x / halfCellSize) * halfCellSize
       self.pos.y = round(self.pos.y / halfCellSize) * halfCellSize
-
+      self.rect.topleft = self.pos
       if Game.current_scene.testCollision(self.rect):
         self.pos = prevPos - (self.pos - prevPos)
 
-      self.rect.topleft = self.pos
-
   def handleEvent(self, event):
     """Enemy movement logic."""
-    if self.is_active is True and Game.stats_required and random.uniform(0.0, 1.0) < self.p_upd_dir:
+    if not self.is_active or not Game.stats_required:
+      return
+    if random.uniform(0.0, 1.0) < self.p_upd_dir:
       self.updateDirection()
 
-    if self.is_active is True and Game.stats_required and random.uniform(0.0, 1.0) < self.p_move:
+    if random.uniform(0.0, 1.0) < self.p_move:
       speed = 2 * self.rect.width
       self.vel = self.direction * speed
     else:
       self.vel = Vector2(0, 0)
 
-    if self.is_active is True and Game.stats_required and random.uniform(0.0, 1.0) < self.p_shoot:
+    if random.uniform(0.0, 1.0) < self.p_shoot:
       halfCellSize = self.rect.w / 2
       bulletSize = halfCellSize // 2
       bulletCenter = self.rect.center + self.direction * (halfCellSize + bulletSize / 2)
