@@ -16,6 +16,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         """Det up for test."""
+        os.environ["SDL_VIDEODRIVER"] = "dummy"
         srcDir = os.path.dirname(__file__)
         os.chdir(srcDir)
         self.app = Application()
