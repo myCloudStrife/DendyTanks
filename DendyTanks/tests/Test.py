@@ -1,31 +1,32 @@
-import time
+"""Test."""
+
 import unittest
 import pygame
-import pygame_gui
 from pygame.math import Vector2
 from DendyTanks.Application import Application
-from DendyTanks import Game
 from DendyTanks.GameObject import PlayerTank
-from DendyTanks.Spawner import Spawner
-from DendyTanks.Scene import Scene
 import os
 
+
 class Test(unittest.TestCase):
+    """Test."""
 
     def setUp(self):
+        """Start application."""
         srcDir = os.path.dirname(__file__)
         os.chdir(srcDir)
         self.app = Application()
 
-
     def test_init_application(self):
+        """Check some global hardcoded params."""
         self.assertEqual(self.app.screenWidth, 640, 'test_init_application_w')
         self.assertEqual(self.app.screenHeight, 480, 'test_init_application_h')
         self.assertEqual(self.app.game_over_screen, False, 'test_init_application_game_over_flag')
 
-
     def player_tank_init(self):
-        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU', ui_element=self.app.menu.playButton)
+        """Check player tank creation."""
+        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU',
+                                   ui_element=self.app.menu.playButton)
         pygame.event.post(event)
         tmp = PlayerTank(pos=Vector2(5, 5), size=10)
         tmp.update(dt=0.5)
@@ -33,9 +34,10 @@ class Test(unittest.TestCase):
         self.assertEqual(tmp.size, 10, 'test_update_player_tank_init_size')
         self.assertEqual(tmp.vel, Vector2(0, 0), 'test_update_player_tank_init_velocity')
 
-
     def player_tank_move(self):
-        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU', ui_element=self.app.menu.playButton)
+        """Check player tank movement."""
+        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU',
+                                   ui_element=self.app.menu.playButton)
         pygame.event.post(event)
         tmp = PlayerTank(pos=Vector2(5, 5), size=10)
         tmp.update(dt=0.5)
@@ -56,8 +58,8 @@ class Test(unittest.TestCase):
         tmp.handleEvent(event)
         self.assertEqual(tmp.direction, Vector2(1, 0), 'test_update_player_tank_dir_right')
 
-
     def tearDown(self):
+        """Close app."""
         event = pygame.event.Event(pygame.USEREVENT, user_type=pygame.QUIT)
         pygame.event.post(event)
 
