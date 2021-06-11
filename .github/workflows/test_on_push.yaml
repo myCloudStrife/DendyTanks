@@ -27,3 +27,5 @@ jobs:
         run: cd DendyTanks/localization && make
       - name: Build docs
         run: cd docs/ && make html
+      - name: Unittest
+        run: python -m unittest DendyTanks/tests/Test.py

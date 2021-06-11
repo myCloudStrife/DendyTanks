@@ -19,7 +19,10 @@ class GameObject():
     """
     self.pos = Vector2(pos.xy)
     self.vel = Vector2(0, 0)
-    self.image = pygame.image.load(resourceName) if resourceName else None
+    try:
+      self.image = pygame.image.load(resourceName) if resourceName else None
+    except FileNotFoundError:
+      self.image = pygame.image.load("../" + resourceName)
     if self.image:
       if size == 0:
         size = self.image.width

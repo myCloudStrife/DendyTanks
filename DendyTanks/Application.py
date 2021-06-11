@@ -23,7 +23,7 @@ class Application:
     Game.ui_manager = pygame_gui.UIManager(screenSize)
     self.time = time()
     self.game_over_screen = False
-    MainMenu()
+    self.menu = MainMenu()
 
   def mainloop(self):
     """App mainloop, iteratively call `handleEvents`, `update` and `render`."""
@@ -69,7 +69,7 @@ class Application:
       if self.game_over_screen and event.type == pygame.KEYDOWN:
         Game.all_objects[:] = []
         self.game_over_screen = False
-        MainMenu()
+        self.menu = MainMenu()
       for obj in Game.all_objects:
         if type(obj) != EnemyTank:
           obj.handleEvent(event)

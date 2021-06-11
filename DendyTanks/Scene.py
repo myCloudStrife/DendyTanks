@@ -39,7 +39,10 @@ class Scene():
           self._processCell(cell, Vector2(i, h))
         h += 1
     self.bbox = Rect(Vector2(0, 0), Vector2(w, h) * self.cellSize)
-    self.bricksImage = pygame.image.load("res/bricks.png")
+    try:
+      self.bricksImage = pygame.image.load("res/bricks.png")
+    except FileNotFoundError:
+      self.bricksImage = pygame.image.load("../res/bricks.png")
     halfSize = self.cellSize // 2
     self.bricksImage = pygame.transform.scale(self.bricksImage, (halfSize, halfSize))
     self.surface = pygame.Surface(self.bbox.size)
