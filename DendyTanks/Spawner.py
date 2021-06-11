@@ -30,8 +30,13 @@ class Spawner(GameObject):
     If none object object spawned then update cooldown and spawn tank when it ready.
     In other case check for object presence.
     """
-    self.cooldown -= dt
     if self.spawnedObject is None:
+      empty = True
+      for obj in Game.all_objects:
+        if hasattr(obj, "testCollision"):
+          empty &= not obj.testCollision(self.rect)
+      if empty:
+        self.cooldown -= dt
       if (self.cooldown < 0 and self.spawnsLeft > 0):
         self.spawnedObject = self.objType(pos=self.pos, size=self.rect.w)
         Game.all_objects.append(self.spawnedObject)
@@ -40,6 +45,10 @@ class Spawner(GameObject):
       self.spawnedObject = None
       self.cooldown = 2.0 + random.random() * 3
       self.startAngle = random.randint(0, 359)
+    else:
+      self.cooldown -= dt
+      if type(self.spawnedObject) == EnemyTank and self.cooldown <= -0.5:
+        self.spawnedObject.is_active = True
 
   def render(self, screen):
     """Draw some animation before spawn."""
@@ -48,6 +57,3 @@ class Spawner(GameObject):
       r = self.rect.w * (1.0 - self.cooldown) * 0.5
       endAngle = self.startAngle + (1.0 - self.cooldown) * 360
       gfxdraw.pie(screen, x, y, int(r), self.startAngle, int(endAngle), (255, 255, 255))
-    else:
-      if type(self.spawnedObject) == EnemyTank and self.cooldown <= -0.5:
-        self.spawnedObject.is_active = True
