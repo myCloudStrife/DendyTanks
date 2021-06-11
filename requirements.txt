@@ -4,3 +4,5 @@ build
 babel
 pybabel
 sphinx
+pygame
+pygame_gui
