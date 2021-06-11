@@ -116,6 +116,56 @@ class Test(unittest.TestCase):
         self.assertEqual(tmp.direction, Vector2(0, -1), 'test_update_player_tank_dir_down_update')
         self.assertEqual(tmp.vel, Vector2(0, -speed), 'test_update_player_tank_vel_down_update')
 
+    def test_player_tank_move_left(self):
+        """Test player tank move left."""
+        Game.current_scene = Scene("../res/levels/level0.txt")
+        Game.current_scene.bbox = Rect(Vector2(-100000, -100000),
+                                       Vector2(100000, 100000) * Game.current_scene.cellSize)
+        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU',
+                                   ui_element=self.app.menu.playButton)
+        pygame.event.post(event)
+        tmp = PlayerTank(pos=Vector2(5, 5), size=10)
+        tmp.update(dt=0.5)
+
+        dt = 10.0
+        speed = 2 * tmp.rect.width
+
+        event = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_LEFT)
+        tmp.handleEvent(event)
+        self.assertEqual(tmp.pos, Vector2(5, 5), 'test_update_player_tank_pos_left')
+        self.assertEqual(tmp.direction, Vector2(-1, 0), 'test_update_player_tank_dir_left')
+        self.assertEqual(tmp.vel, Vector2(-speed, 0), 'test_update_player_tank_vel_left')
+        tmp.update(dt=dt)
+        self.assertEqual(tmp.pos, Vector2(-speed, 0) * dt + Vector2(5, 5),
+                         'test_update_player_tank_pos_left_update')
+        self.assertEqual(tmp.direction, Vector2(-1, 0), 'test_update_player_tank_dir_left_update')
+        self.assertEqual(tmp.vel, Vector2(-speed, 0), 'test_update_player_tank_vel_left_update')
+
+    def test_player_tank_move_right(self):
+        """Test player tank move right."""
+        Game.current_scene = Scene("../res/levels/level0.txt")
+        Game.current_scene.bbox = Rect(Vector2(-100000, -100000),
+                                       Vector2(100000, 100000) * Game.current_scene.cellSize)
+        event = pygame.event.Event(pygame.USEREVENT, user_type='MAINMENU',
+                                   ui_element=self.app.menu.playButton)
+        pygame.event.post(event)
+        tmp = PlayerTank(pos=Vector2(5, 5), size=10)
+        tmp.update(dt=0.5)
+
+        dt = 10.0
+        speed = 2 * tmp.rect.width
+
+        event = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RIGHT)
+        tmp.handleEvent(event)
+        self.assertEqual(tmp.pos, Vector2(5, 5), 'test_update_player_tank_pos_right')
+        self.assertEqual(tmp.direction, Vector2(1, 0), 'test_update_player_tank_dir_right')
+        self.assertEqual(tmp.vel, Vector2(speed, 0), 'test_update_player_tank_vel_right')
+        tmp.update(dt=dt)
+        self.assertEqual(tmp.pos, Vector2(speed, 0) * dt + Vector2(5, 5),
+                         'test_update_player_tank_pos_right_update')
+        self.assertEqual(tmp.direction, Vector2(1, 0), 'test_update_player_tank_dir_right_update')
+        self.assertEqual(tmp.vel, Vector2(speed, 0), 'test_update_player_tank_vel_right_update')
+
     def tearDown(self):
         """Tear down."""
         pass
